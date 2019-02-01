@@ -4,9 +4,8 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.os.AsyncTask
 import android.util.Log
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.RequestBody
+import okhttp3.*
+import java.io.IOException
 import java.lang.Exception
 import kotlin.math.log
 
@@ -29,52 +28,36 @@ object net {
     val exp = url + "expupgrade.php"
 }
 
-fun post (body:RequestBody, url : String, context: Context): String? {
+fun loginadd(body:RequestBody, url : String, context: Context): String? {
     var resu: String? = null
-    var client : OkHttpClient? =null
-    var request : Request? = null
+    var client: OkHttpClient? = null
+    var request: Request? = null
     try {
-            request = Request.Builder()
-            .url(url)
-            .post(body)
-            .build()
-            client = OkHttpClient()
+        request = Request.Builder()
+                .url(url)
+                .post(body)
+                .build()
+        client = OkHttpClient()
 
-    }catch (e:Exception){
-        Log.e("strano1",e.message)
+    } catch (e: Exception) {
+        Log.e("strano1", e.message)
     }
+    client?.newCall(request)?.enqueue(object : Callback{
+        override fun onResponse(call: Call, response: Response) {
+            //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            Log.e("strano2si",response.body().toString())
+            resu= response.body().toString()
 
-    class async : AsyncTask<Void, Void, String>() {
-        override fun doInBackground(vararg params: Void?): String? {
-            try {
-                Log.e("strano2", "arriva qui!")
-                val test = client!!.newCall(request).execute()
-                Log.e("strano2", test.body().toString())
-                return test.body().toString()
-
-            } catch (e: Exception) {
-                Log.e("strano2", e.javaClass.toString()+e.message)
-            }
-            return "mela"
         }
 
-        override fun onPostExecute(result: String?) {
-            super.onPostExecute(result)
-            Log.e("strano2", "principale")
-            resu = result
+        override fun onFailure(call: Call, e: IOException) {
+            //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            Log.e("strano2si",e.javaClass.toString() + e.message)
 
         }
-    }
-        try {
 
-
-        async().execute()
-        return resu
-
-        }catch (e:Exception){
-            Log.e("strano3",e.message)
-        }
-        return null
-    }
+    })
+    return resu
+}
 
 

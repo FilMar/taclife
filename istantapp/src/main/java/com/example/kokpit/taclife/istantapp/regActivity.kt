@@ -31,20 +31,20 @@ class regActivity : AppCompatActivity() {
                                 data.toString()
                         )
               //  TODO("aggiunta utente al db")
-                startActivity(Intent(this, menuActivity::class.java))
+               // startActivity(Intent(this, menuActivity::class.java))
             }
 
-                //var test = usercorrente!!.adduser(this)
+                var test = usercorrente!!.adduser(this)
 
-               // val alert = alert(
-                    //"test",
-                    //test.toString(),
-                 //   this
-                //)
+                val alert = alert(
+                    "test",
+                    test.toString(),
+                   this
+                )
 
-                //alert.setNeutralButton("ok") { _: DialogInterface?, _: Int ->  startActivity(Intent(this, regActivity::class.java))
-                //}
-                //create(alert)
+                alert.setNeutralButton("ok") { _: DialogInterface?, _: Int ->  startActivity(Intent(this, regActivity::class.java))
+                }
+                create(alert)
             }
         }
 

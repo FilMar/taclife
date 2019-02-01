@@ -45,7 +45,7 @@ class user {
             .add("dataNReg",this.dataN)
             .build()
 
-         return post(body,net.adduser,context)
+         return loginadd(body,net.adduser,context)
     }
 }
 var usercorrente : user? = null
