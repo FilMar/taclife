@@ -19,16 +19,16 @@ object CheckNetworking {
 }
 
 object net {
-    private val url = "http://taclife.altervista.org/"
+    private val url = "http://taclife.altervista.org/loginadd.php"
 
-    val adduser = url + "loginadd.php"
+    val adduser = url + ""
 
     val usercheck = url + "logincheck.php"
 
     val exp = url + "expupgrade.php"
 }
 
-fun loginadd(body:RequestBody, url : String, context: Context): String? {
+fun loginadd(body: FormBody, url : String): String? {
     var resu: String? = null
     var client: OkHttpClient? = null
     var request: Request? = null
@@ -42,6 +42,7 @@ fun loginadd(body:RequestBody, url : String, context: Context): String? {
     } catch (e: Exception) {
         Log.e("strano1", e.message)
     }
+
     client?.newCall(request)?.enqueue(object : Callback{
         override fun onResponse(call: Call, response: Response) {
             //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -52,7 +53,7 @@ fun loginadd(body:RequestBody, url : String, context: Context): String? {
 
         override fun onFailure(call: Call, e: IOException) {
             //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            Log.e("strano2si",e.javaClass.toString() + e.message)
+            Log.e("strano2si",e.javaClass.toString() +"  "+ e.message)
 
         }
 
@@ -60,4 +61,7 @@ fun loginadd(body:RequestBody, url : String, context: Context): String? {
     return resu
 }
 
+fun logincheck(url: String, context: Context){
+
+}
 

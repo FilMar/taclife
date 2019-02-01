@@ -29,23 +29,25 @@ class user {
         this.privilegi = pri
     }
 
-    constructor(jsonElement: String) {
-        parser.fromJson(jsonElement , this.javaClass)
+    constructor(context: Context) {
+
+        // TODO("logincheck")
+        val ris = logincheck(net.usercheck, context)
     }
 
     fun tojson(): String? {
         return parser.toJson(this)
     }
 
-    fun adduser (context: Context): String? {
+    fun adduser (): String? {
         val body = FormBody.Builder()
-            .add("utenteReg",this.utente)
-            .add("passwReg",this.passwd)
-            .add("pass2Reg",this.passwd)
-            .add("dataNReg",this.dataN)
-            .build()
+                .add("utenteReg", this.utente)
+                .add("passwReg", this.passwd)
+                .add("pass2Reg", this.passwd)
+                .add("dataNReg", this.dataN)
+                .build()
 
-         return loginadd(body,net.adduser,context)
+        return loginadd(body, net.adduser)
     }
 }
 var usercorrente : user? = null

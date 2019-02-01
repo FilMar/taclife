@@ -34,7 +34,7 @@ class regActivity : AppCompatActivity() {
                // startActivity(Intent(this, menuActivity::class.java))
             }
 
-                var test = usercorrente!!.adduser(this)
+                var test = usercorrente!!.adduser()
 
                 val alert = alert(
                     "test",
